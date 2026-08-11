@@ -9,6 +9,7 @@ const CORRECT_PIN = "0612";
 let currentPin = "";
 let fireworksAnimationId = null;
 let isLetterOpened = false;
+let isTheaterMode = false;
 
 // Letter Text for Typewriter Effect
 const LETTER_TEXT = "Happy Monthsary, myheart! Thank you for the endless laughter and our journey starting from the kargador serye. Here is our little interactive photo booth and music player (I know this isn't much, but I tried my best to develop this website for you, my dear beloved!). I love you so much, babytwin!";
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initVaultPin();
     initKeyboardSupport();
     initAudioPlayer();
+    initVideoEvents();
 });
 
 /* ==========================================================================
@@ -220,7 +222,6 @@ function triggerSpideyWebPull() {
     if (spideyOverlay) spideyOverlay.classList.remove("hidden");
     if (mainSite) mainSite.classList.remove("hidden");
 
-    // Pull main site up into view
     setTimeout(() => {
         if (mainSite) {
             mainSite.classList.remove("spidey-pull-initial");
@@ -229,52 +230,78 @@ function triggerSpideyWebPull() {
         initFloatingHearts();
     }, 400);
 
-    // Clean up intro overlay after transition
     setTimeout(() => {
         if (introOverlay) introOverlay.style.display = "none";
     }, 1600);
 }
 
 /* ==========================================================================
-   BLUE LILIES ART EXHIBIT LOGIC
+   CINEMATIC VIDEO PRESENTATION LOGIC
    ========================================================================== */
-function presentFlower() {
-    // Generate floating blue petals across the screen
-    const petalEmojis = ["🪻", "💙", "🌸", "✨", "💙"];
-    
-    for (let i = 0; i < 35; i++) {
-        setTimeout(() => {
-            const petal = document.createElement("div");
-            petal.className = "blue-petal";
-            petal.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
-            petal.style.left = Math.random() * 100 + "vw";
-            petal.style.fontSize = Math.random() * 20 + 16 + "px";
-            
-            const duration = Math.random() * 3 + 3;
-            petal.style.animationDuration = duration + "s";
+function initVideoEvents() {
+    const mainVideo = id("main-video");
+    const overlay = id("video-overlay");
 
-            document.body.appendChild(petal);
-            setTimeout(() => petal.remove(), duration * 1000);
-        }, i * 80);
+    if (mainVideo) {
+        // When video ends, bring back overlay screen
+        mainVideo.addEventListener("ended", () => {
+            if (overlay) overlay.classList.remove("playing");
+        });
+
+        // Pause audio player if playing video
+        mainVideo.addEventListener("play", () => {
+            const spotifyAudio = id("spotify-audio");
+            const playBtn = id("play-btn");
+            if (spotifyAudio && !spotifyAudio.paused) {
+                spotifyAudio.pause();
+                if (playBtn) playBtn.textContent = "▶";
+            }
+            triggerHeartBurst();
+        });
     }
 }
 
-function swapExhibitImage(cardElement, title, desc) {
-    const mainImg = id("main-exhibit-img");
-    const plaqueTitle = document.querySelector(".museum-plaque h3");
-    const plaqueDesc = document.querySelector(".exhibit-desc");
+function playMainVideo() {
+    const mainVideo = id("main-video");
+    const overlay = id("video-overlay");
 
-    const clickedImg = cardElement.querySelector("img");
-    if (mainImg && clickedImg) {
-        mainImg.style.opacity = "0.3";
-        setTimeout(() => {
-            mainImg.src = clickedImg.src;
-            mainImg.style.opacity = "1";
-        }, 200);
+    if (overlay) overlay.classList.add("playing");
+    if (mainVideo) {
+        mainVideo.play().catch(err => {
+            console.log("Autoplay dynamic prompt:", err);
+        });
     }
+}
 
-    if (plaqueTitle && title) plaqueTitle.textContent = title;
-    if (plaqueDesc && desc) plaqueDesc.textContent = desc;
+function toggleTheaterMode() {
+    isTheaterMode = !isTheaterMode;
+    document.body.classList.toggle("theater-mode-active", isTheaterMode);
+
+    const btnText = id("theater-btn-text");
+    if (btnText) {
+        btnText.textContent = isTheaterMode ? "✨ Exit Theater Mode" : "🎭 Enable Theater Mode";
+    }
+}
+
+function triggerHeartBurst() {
+    const heartContainer = id("heart-container");
+    if (!heartContainer) return;
+
+    for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.textContent = ["💖", "🎬", "✨", "❤️", "🍿"][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = Math.random() * 18 + 16 + "px";
+
+            const duration = Math.random() * 3 + 3;
+            heart.style.animationDuration = duration + "s";
+
+            heartContainer.appendChild(heart);
+            setTimeout(() => heart.remove(), duration * 1000);
+        }, i * 60);
+    }
 }
 
 /* ==========================================================================

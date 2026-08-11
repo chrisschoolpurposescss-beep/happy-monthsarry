@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Monthsary Babyytwin!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating Hearts Container -->
+    <div id="heart-container"></div>
+
+    <!-- Header Section -->
+    <header class="hero">
+        <h1 class="glow-text">Happy Monthsary! ❤️</h1>
+        <p class="subtitle">Another month of love wooohooo todoo nato</p>
+    </header>
+
+    <!-- Interactive Envelope Section -->
+    <section class="message-section">
+        <div class="envelope" onclick="openEnvelope()">
+            <div class="letter">
+                <h2>To my babytwin,</h2>
+                <p>Happy Monthsary, myheart! Thank you for the endless laughter and our journey starts from the kargador serye. Here is our little interactive photo booth and music player. I love you, babytwin!</p>
+            </div>
+        </div>
+        <p class="click-hint">Click the envelope to open!</p>
+    </section>
+
+    <!-- Spotify Style Player -->
+    <section class="spotify-container">
+        <div class="spotify-card">
+            <div class="track-info">
+                <!-- Replace with your album cover image file -->
+                <img src="https://i.pinimg.com/originals/17/c6/68/17c6681433c2c3fceb5084d34f75ad7c.jpg" id="album-art" alt="Album Cover">
+                <div class="track-details">
+                    <h3 id="song-title">I Like Me Better</h3>
+                    <p id="artist-name">Lauv</p>
+                </div>
+            </div>
+
+            <!-- Replace your-song.mp3 with your actual audio file name -->
+            <audio id="spotify-audio" src="song.mp3"></audio>
+
+            <div class="progress-container" id="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="time-stamps">
+                <span id="current-time">0:00</span>
+                <span id="duration-time">3:17</span>
+            </div>
+
+            <div class="controls">
+                <button class="spotify-btn" id="lyrics-btn" onclick="toggleLyrics()">🎤 Lyrics</button>
+                <button class="spotify-btn play-btn" id="play-btn" onclick="togglePlay()">▶</button>
+            </div>
+
+            <div class="lyrics-box" id="lyrics-box">
+                <h4>Lyrics</h4>
+                <div class="lyrics-content">
+                    <p>[Verse 1]</p>
+                    <p>To be young and in love in New York City</p>
+                    <p>To not know who I am but still know that I'm good long as you're here with me</p>
+                    <p>To be drunk and in love in New York City</p>
+                    <p>Midnight into morning coffee</p>
+                    <p>Burnin' through the hours talkin' (Damn)</p>
+                    <br>
+                    <p>[Chorus]</p>
+                    <p>I like me better when I'm with you</p>
+                    <p>I like me better when I'm with you</p>
+                    <p>I knew from the first time</p>
+                    <p>I'd stay for a long time 'cause</p>
+                    <p>I like me better when</p>
+                    <p>I like me better when I'm with you</p>
+                    <br>
+                    <p>[Verse 2]</p>
+                    <p>I don't know what it is but I got that feeling (Yeah)</p>
+                    <p>Wakin' up in this bed next to you, swear the room, yeah, it got no ceilin'</p>
+                    <p>If we lay, let the day just pass us by</p>
+                    <p>I might get to too much talkin'</p>
+                    <p>I might have to tell you somethin' (Damn)</p>
+                    <br>
+                    <p>[Chorus]</p>
+                    <p>I like me better when I'm with you</p>
+                    <p>I like me better when I'm with you</p>
+                    <p>I knew from the first time</p>
+                    <p>I'd stay for a long time 'cause</p>
+                    <p>I like me better when</p>
+                    <p>I like me better when I'm with you</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Booth Gallery Section -->
+    <section class="booth-section">
+        <h2>Our Photo Booth 📸</h2>
+        <p>Click on our memories to zoom in!</p>
+        
+        <div class="gallery">
+            <div class="polaroid" onclick="openLightbox(this)">
+                <img src="https://via.placeholder.com/400x400/ffb6c1/ffffff?text=Add+Photo+1" alt="Memory 1">
+                <div class="caption">Our First Date</div>
+            </div>
+            <div class="polaroid" onclick="openLightbox(this)">
+                <img src="https://via.placeholder.com/400x400/ff69b4/ffffff?text=Add+Photo+2" alt="Memory 2">
+                <div class="caption">Anime Serye Nights</div>
+            </div>
+            <div class="polaroid" onclick="openLightbox(this)">
+                <img src="https://via.placeholder.com/400x400/ff1493/ffffff?text=Add+Photo+3" alt="Memory 3">
+                <div class="caption">Just Us</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Zoom Overlay -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Enlarged Memory">
+        <p id="lightbox-caption"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

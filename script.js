@@ -109,7 +109,7 @@ function initKeyboardSupport() {
 }
 
 /* ==========================================================================
-   STEP 2: FIREWORKS & MAIN SITE REVEAL
+   STEP 2: FIREWORKS & SPIDER-MAN WEB TRANSITION REVEAL
    ========================================================================== */
 function startFireworksShow() {
     const canvas = document.getElementById("fireworks-canvas");
@@ -208,28 +208,73 @@ function startFireworksShow() {
 
     setTimeout(() => {
         if (fireworksAnimationId) cancelAnimationFrame(fireworksAnimationId);
-        revealMainSite();
-    }, 3500);
+        triggerSpideyWebPull();
+    }, 3200);
 }
 
-function revealMainSite() {
-    const introOverlay = document.getElementById("intro-overlay");
-    const mainSite = document.getElementById("main-site");
+function triggerSpideyWebPull() {
+    const spideyOverlay = id("spidey-web-overlay");
+    const mainSite = id("main-site");
+    const introOverlay = id("intro-overlay");
 
-    if (introOverlay) {
-        introOverlay.style.transition = "opacity 1.2s ease";
-        introOverlay.style.opacity = "0";
-        introOverlay.style.pointerEvents = "none";
-    }
+    if (spideyOverlay) spideyOverlay.classList.remove("hidden");
+    if (mainSite) mainSite.classList.remove("hidden");
 
-    if (mainSite) {
-        mainSite.classList.remove("hidden");
+    // Pull main site up into view
+    setTimeout(() => {
+        if (mainSite) {
+            mainSite.classList.remove("spidey-pull-initial");
+            mainSite.classList.add("spidey-pulled");
+        }
         initFloatingHearts();
-    }
+    }, 400);
 
+    // Clean up intro overlay after transition
     setTimeout(() => {
         if (introOverlay) introOverlay.style.display = "none";
-    }, 1200);
+    }, 1600);
+}
+
+/* ==========================================================================
+   BLUE LILIES ART EXHIBIT LOGIC
+   ========================================================================== */
+function presentFlower() {
+    // Generate floating blue petals across the screen
+    const petalEmojis = ["🪻", "💙", "🌸", "✨", "💙"];
+    
+    for (let i = 0; i < 35; i++) {
+        setTimeout(() => {
+            const petal = document.createElement("div");
+            petal.className = "blue-petal";
+            petal.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+            petal.style.left = Math.random() * 100 + "vw";
+            petal.style.fontSize = Math.random() * 20 + 16 + "px";
+            
+            const duration = Math.random() * 3 + 3;
+            petal.style.animationDuration = duration + "s";
+
+            document.body.appendChild(petal);
+            setTimeout(() => petal.remove(), duration * 1000);
+        }, i * 80);
+    }
+}
+
+function swapExhibitImage(cardElement, title, desc) {
+    const mainImg = id("main-exhibit-img");
+    const plaqueTitle = document.querySelector(".museum-plaque h3");
+    const plaqueDesc = document.querySelector(".exhibit-desc");
+
+    const clickedImg = cardElement.querySelector("img");
+    if (mainImg && clickedImg) {
+        mainImg.style.opacity = "0.3";
+        setTimeout(() => {
+            mainImg.src = clickedImg.src;
+            mainImg.style.opacity = "1";
+        }, 200);
+    }
+
+    if (plaqueTitle && title) plaqueTitle.textContent = title;
+    if (plaqueDesc && desc) plaqueDesc.textContent = desc;
 }
 
 /* ==========================================================================

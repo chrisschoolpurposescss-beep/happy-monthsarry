@@ -12,6 +12,22 @@ body {
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
     color: #333333;
+    transition: background 0.8s ease;
+}
+
+/* Theater Mode Dimmer State */
+body.theater-mode-active {
+    background: #020203;
+}
+
+body.theater-mode-active .hero,
+body.theater-mode-active .message-section,
+body.theater-mode-active .spotify-container,
+body.theater-mode-active .booth-section {
+    opacity: 0.15;
+    filter: blur(4px);
+    pointer-events: none;
+    transition: all 0.8s ease;
 }
 
 /* ==================== INTRO & LOCK VAULT ==================== */
@@ -231,7 +247,7 @@ body {
     to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
 }
 
-.hero { position: relative; z-index: 1; padding: 50px 20px 20px; }
+.hero { position: relative; z-index: 1; padding: 50px 20px 20px; transition: opacity 0.5s ease; }
 .glow-text {
     font-family: 'Dancing Script', cursive;
     font-size: 3.8rem;
@@ -249,6 +265,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: opacity 0.5s ease;
 }
 
 .envelope-wrapper {
@@ -379,193 +396,207 @@ body {
     font-weight: 500;
 }
 
-/* ==================== ART EXHIBIT: BLUE LILIES ==================== */
-.exhibit-section {
+/* ==================== CINEMATIC VIDEO SECTION ==================== */
+.video-section {
     position: relative;
-    z-index: 2;
-    max-width: 850px;
+    z-index: 10;
+    max-width: 880px;
     margin: 60px auto 40px;
     padding: 40px 20px;
-    background: rgba(15, 23, 42, 0.75);
-    border: 1px solid rgba(59, 130, 246, 0.25);
+    background: rgba(18, 18, 26, 0.85);
+    border: 1px solid rgba(244, 63, 94, 0.25);
     border-radius: 28px;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(59, 130, 246, 0.15);
+    backdrop-filter: blur(25px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 0 35px rgba(225, 29, 72, 0.12);
     overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.exhibit-spotlight {
+.video-spotlight {
     position: absolute;
-    top: -100px; left: 50%;
+    top: -120px; left: 50%;
     transform: translateX(-50%);
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(96, 165, 250, 0.25) 0%, transparent 70%);
+    width: 450px; height: 350px;
+    background: radial-gradient(circle, rgba(244, 63, 94, 0.2) 0%, transparent 70%);
     pointer-events: none;
 }
 
-.gallery-tag {
+.cinema-tag {
     font-family: 'Cinzel', serif;
     font-size: 0.75rem;
     letter-spacing: 3px;
-    color: #60a5fa;
+    color: #fb7185;
     text-transform: uppercase;
 }
 
-.exhibit-header h2 {
+.video-header h2 {
     font-family: 'Cinzel', serif;
     font-size: 2.2rem;
-    color: #93c5fd;
-    margin: 5px 0 8px;
-    text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+    color: #f43f5e;
+    margin: 6px 0 8px;
+    text-shadow: 0 0 15px rgba(244, 63, 94, 0.5);
 }
 
-.exhibit-header p {
-    color: #94a3b8;
+.video-header p {
+    color: #a1a1aa;
     font-size: 0.9rem;
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
 
-.flower-gift-card {
+/* Cinema Video Container Frame */
+.cinema-frame-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 28px;
+}
+
+.cinema-frame {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 16 / 9;
+    background: #000000;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(244, 63, 94, 0.25);
+}
+
+.cinema-frame video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 18px;
+}
+
+/* Custom Interactive Overlay Screen */
+.video-overlay-play {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(180deg, rgba(9, 9, 11, 0.4) 0%, rgba(9, 9, 11, 0.85) 100%);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 25px;
-    margin-bottom: 35px;
+    cursor: pointer;
+    z-index: 5;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-@media(min-width: 640px) {
-    .flower-gift-card {
-        flex-direction: row;
-        text-align: left;
-    }
-}
-
-.flower-art-frame {
-    position: relative;
-    width: 260px;
-    height: 320px;
-    border: 10px solid #1e293b;
-    outline: 2px solid #3b82f6;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
-    flex-shrink: 0;
-}
-
-.flower-art-frame img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.flower-art-frame:hover img {
-    transform: scale(1.08);
-}
-
-.frame-shine {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+.video-overlay-play.playing {
+    opacity: 0;
+    visibility: hidden;
     pointer-events: none;
 }
 
-.museum-plaque {
-    background: rgba(30, 41, 59, 0.8);
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    padding: 22px;
-    border-radius: 16px;
-    max-width: 400px;
+.play-pulse {
+    position: absolute;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: rgba(244, 63, 94, 0.3);
+    animation: pulseRing 1.8s infinite;
 }
 
-.museum-plaque h3 {
+@keyframes pulseRing {
+    0% { transform: scale(0.8); opacity: 0.8; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+.play-icon-ring {
+    position: relative;
+    width: 75px; height: 75px;
+    background: linear-gradient(135deg, #f43f5e, #be123c);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(244, 63, 94, 0.6);
+    transition: transform 0.3s ease;
+    z-index: 2;
+}
+
+.video-overlay-play:hover .play-icon-ring {
+    transform: scale(1.12);
+}
+
+.play-icon {
+    color: white;
+    font-size: 1.6rem;
+    margin-left: 4px;
+}
+
+.play-title {
+    margin: 16px 0 2px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    z-index: 2;
+}
+
+.play-subtitle {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #fb7185;
+    font-weight: 500;
+    z-index: 2;
+}
+
+/* Video Museum Plaque Details */
+.video-plaque {
+    background: rgba(24, 24, 32, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 22px 28px;
+    border-radius: 18px;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.video-plaque h3 {
     font-family: 'Cinzel', serif;
     color: #f8fafc;
     margin: 0 0 6px;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
 }
 
-.artist-credit {
-    font-size: 0.78rem;
-    color: #38bdf8;
+.video-credit {
+    font-size: 0.8rem;
+    color: #fb7185;
     font-weight: 500;
     margin-bottom: 12px;
 }
 
-.exhibit-desc {
-    font-size: 0.88rem;
+.video-desc {
+    font-size: 0.9rem;
     color: #cbd5e1;
     line-height: 1.6;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
-.gift-btn {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    color: white;
-    border: none;
-    padding: 12px 22px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.gift-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(37, 99, 235, 0.6);
-}
-
-.exhibit-gallery {
+.cinema-actions {
     display: flex;
     justify-content: center;
-    gap: 15px;
 }
 
-.art-card {
-    width: 80px; height: 90px;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.art-card img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-}
-
-.art-card:hover {
-    border-color: #60a5fa;
-    transform: translateY(-4px);
-}
-
-.art-title {
-    position: absolute;
-    bottom: 0; width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    font-size: 0.65rem;
+.cinema-btn {
+    background: linear-gradient(135deg, #e11d48, #9f1239);
     color: white;
-    padding: 2px 0;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(225, 29, 72, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
 }
 
-/* Blue Petals Animation */
-.blue-petal {
-    position: fixed;
-    top: -20px;
-    font-size: 1.5rem;
-    pointer-events: none;
-    z-index: 9999;
-    animation: fallPetal linear forwards;
-}
-
-@keyframes fallPetal {
-    to {
-        transform: translateY(105vh) rotate(720deg);
-        opacity: 0;
-    }
+.cinema-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(225, 29, 72, 0.6);
 }
 
 /* ==================== SPOTIFY PLAYER ==================== */
@@ -575,6 +606,7 @@ body {
     padding: 20px;
     position: relative;
     z-index: 1;
+    transition: opacity 0.5s ease;
 }
 
 .spotify-card {
@@ -689,7 +721,7 @@ body {
 .lyrics-content p { margin: 4px 0; font-size: 0.82rem; color: #d4d4d8; }
 
 /* ==================== PHOTO BOOTH & LIGHTBOX ==================== */
-.booth-section { position: relative; z-index: 1; padding: 40px 20px; }
+.booth-section { position: relative; z-index: 1; padding: 40px 20px; transition: opacity 0.5s ease; }
 .booth-section h2 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #f43f5e; margin-bottom: 5px; }
 .gallery { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 30px; }
 .polaroid {

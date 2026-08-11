@@ -97,44 +97,45 @@
             <p class="click-hint">Tap the envelope to open! ✉️</p>
         </section>
 
-        <!-- ART EXHIBIT: BLUE LILIES FOR HER -->
-        <section class="exhibit-section">
-            <div class="exhibit-spotlight"></div>
-            <div class="exhibit-header">
-                <span class="gallery-tag">🏛️ PRIVATE EXHIBIT</span>
-                <h2>I know you Loved this flowers so I'd love to give you some</h2>
-                <p>A Flower dedicated solely to you.</p>
+        <!-- CINEMATIC VIDEO PRESENTATION SECTION -->
+        <section class="video-section" id="video-section">
+            <div class="video-spotlight"></div>
+            
+            <div class="video-header">
+                <span class="cinema-tag">🎬 SPECIAL FEATURE</span>
+                <h2>Our Story in Motion ✨</h2>
+                <p>Press play to relive our favorite moments together</p>
             </div>
 
-            <div class="flower-gift-card">
-                <div class="flower-art-frame">
-                    <img id="main-exhibit-img" src="https://i.pinimg.com/originals/61/c5/eb/61c5ebb4c021e371f6f3333e243ac717.gif" alt="Blue Lily Masterpiece">
-                    <div class="frame-shine"></div>
+            <div class="cinema-frame-container">
+                <div class="cinema-frame" id="cinema-frame">
+                    <!-- Standard video player: replace 'our-memory-video.mp4' with your video file path or URL -->
+                    <video id="main-video" poster="https://images.unsplash.com/photo-1518173946687-a4c8a383392e?auto=format&fit=crop&w=1200&q=80" controls preload="metadata">
+                        <source src="our-memory-video.mp4" type="video/mp4">
+                        Your browser does not support video playback.
+                    </video>
+                    
+                    <!-- Interactive Overlay Splash Screen -->
+                    <div class="video-overlay-play" id="video-overlay" onclick="playMainVideo()">
+                        <div class="play-pulse"></div>
+                        <div class="play-icon-ring">
+                            <span class="play-icon">▶</span>
+                        </div>
+                        <p class="play-title">Watch Our Memories</p>
+                        <p class="play-subtitle">Click to start presentation 🍿</p>
+                    </div>
                 </div>
+            </div>
+
+            <div class="video-plaque">
+                <h3>"A Celebration of Us" 💖</h3>
+                <p class="video-credit">Directed with love by KurisKuris • For My Palangga</p>
+                <p class="video-desc">Every second tells a piece of our story—the late night calls, sweet laughter, and every quiet moment in between.</p>
                 
-                <div class="museum-plaque">
-                    <h3>"Flowers for My Babytwin"</h3>
-                    <p class="artist-credit">From Kuriskuris</p>
-                    <p class="exhibit-desc">These flowers symbolizes devotion, tranquility, and the eternal beauty of our journey together.</p>
-                    <button class="gift-btn" onclick="presentFlower()">
-                        <span>🪻</span>
+                <div class="cinema-actions">
+                    <button class="cinema-btn" id="theater-btn" onclick="toggleTheaterMode()">
+                        <span id="theater-btn-text">🎭 Enable Theater Mode</span>
                     </button>
-                </div>
-            </div>
-
-            <!-- Mini Art Gallery Row -->
-            <div class="exhibit-gallery">
-                <div class="art-card" onclick="swapExhibitImage(this, 'Blue Lily Harmony', 'A peaceful bloom capturing late-night calls and shared smiles.')">
-                    <img src="https://i.pinimg.com/736x/e0/6d/f8/e06df8c41efc18c44b34656a0506c3cb.jpg" alt="Lily Artwork 1">
-                    <div class="art-title">Exhibit #1</div>
-                </div>
-                <div class="art-card" onclick="swapExhibitImage(this, 'Midnight Cobalt Blossom', 'Radiant blue petals crafted with organic blushes.')">
-                    <img src="https://i.pinimg.com/736x/57/3c/a5/573ca5877d07f35d8c237bf10ad69ca4.jpg" alt="Lily Artwork 2">
-                    <div class="art-title">Exhibit #2</div>
-                </div>
-                <div class="art-card" onclick="swapExhibitImage(this, 'Celestial Serenade', 'Representing every sweet laughter and anime night we shared.')">
-                    <img src="https://i.pinimg.com/736x/f0/28/de/f028dea2e0314a1d1804bf9d281f91a8.jpg" alt="Lily Artwork 3">
-                    <div class="art-title">Exhibit #3</div>
                 </div>
             </div>
         </section>

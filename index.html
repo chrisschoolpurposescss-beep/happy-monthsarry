@@ -53,10 +53,21 @@
             <canvas id="fireworks-canvas"></canvas>
         </div>
 
+        <!-- STEP 3: SPIDER-MAN WEB ANIMATION OVERLAY -->
+        <div id="spidey-web-overlay" class="hidden">
+            <div class="spidey-icon spidey-left">🕷️</div>
+            <div class="spidey-icon spidey-right">🕷️</div>
+            <svg id="web-svg" xmlns="http://www.w3.org/2000/svg">
+                <line id="web-line-left" x1="0" y1="0" x2="50%" y2="50%" class="web-strand" />
+                <line id="web-line-right" x1="100%" y1="0" x2="50%" y2="50%" class="web-strand" />
+            </svg>
+            <div class="spidey-badge">THWIP! 🕸️</div>
+        </div>
+
     </div>
 
     <!-- MAIN WEBSITE CONTENT -->
-    <div id="main-site" class="hidden">
+    <div id="main-site" class="hidden spidey-pull-initial">
         
         <!-- Floating Hearts Container -->
         <div id="heart-container"></div>
@@ -84,6 +95,48 @@
                 </div>
             </div>
             <p class="click-hint">Tap the envelope to open! ✉️</p>
+        </section>
+
+        <!-- ART EXHIBIT: BLUE LILIES FOR HER -->
+        <section class="exhibit-section">
+            <div class="exhibit-spotlight"></div>
+            <div class="exhibit-header">
+                <span class="gallery-tag">🏛️ PRIVATE EXHIBIT</span>
+                <h2>The Blue Lily Pavilion 🪻</h2>
+                <p>A curated botanical art space dedicated solely to you.</p>
+            </div>
+
+            <div class="flower-gift-card">
+                <div class="flower-art-frame">
+                    <img id="main-exhibit-img" src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" alt="Blue Lily Masterpiece">
+                    <div class="frame-shine"></div>
+                </div>
+                
+                <div class="museum-plaque">
+                    <h3>"Blue Lilies for My Palangga"</h3>
+                    <p class="artist-credit">Artist: KurisKuris • Medium: Pure Love & Pixels</p>
+                    <p class="exhibit-desc">Rare blue lilies symbolizing devotion, tranquility, and the eternal beauty of our journey together.</p>
+                    <button class="gift-btn" onclick="presentFlower()">
+                        <span>Give Her a Blue Lily 🪻</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mini Art Gallery Row -->
+            <div class="exhibit-gallery">
+                <div class="art-card" onclick="swapExhibitImage(this, 'Blue Lily Harmony', 'A peaceful bloom capturing late-night calls and shared smiles.')">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Lily Artwork 1">
+                    <div class="art-title">Exhibit #1</div>
+                </div>
+                <div class="art-card" onclick="swapExhibitImage(this, 'Midnight Cobalt Blossom', 'Radiant blue petals crafted with organic blushes.')">
+                    <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=600&q=80" alt="Lily Artwork 2">
+                    <div class="art-title">Exhibit #2</div>
+                </div>
+                <div class="art-card" onclick="swapExhibitImage(this, 'Celestial Serenade', 'Representing every sweet laughter and anime night we shared.')">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Lily Artwork 3">
+                    <div class="art-title">Exhibit #3</div>
+                </div>
+            </div>
         </section>
 
         <!-- Spotify Style Player -->
@@ -141,7 +194,7 @@
             
             <div class="gallery">
                 <div class="polaroid" onclick="openLightbox(this)">
-                    <img src="aisha 2.jpg">
+                    <img src="aisha 2.jpg" alt="Memory 1">
                     <div class="caption">Our First Date</div>
                 </div>
                 <div class="polaroid" onclick="openLightbox(this)">
